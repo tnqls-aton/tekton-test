@@ -2,10 +2,6 @@
 
 FROM node:14
 
-WORKDIR /usr/src/server/app
-
-RUN mkdir -p /usr/src/server/app
-
 COPY app.js .
 
 CMD ["node", "app.js"]
