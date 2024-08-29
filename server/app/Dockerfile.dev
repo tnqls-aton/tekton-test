@@ -2,8 +2,10 @@
 
 FROM node:14
 
-COPY app.js .
+WORKDIR /usr/src/app
 
-CMD ["node", "app.js"]
+RUN npm install
 
-EXPOSE 3000
+COPY ./ ./
+
+CMD ["node", "index.js"]
