@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tektontestpod
+  namespace: tekton-pipeline-sample
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      name: test-app
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: test-container
+          image: dktnqls0624/project:0.0.3
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-lb-test
+  namespace: tekton-pipeline-sample
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: test
